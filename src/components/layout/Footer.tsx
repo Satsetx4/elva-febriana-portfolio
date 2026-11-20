@@ -1,7 +1,7 @@
-import { Mail, MessageCircle, RotateCcw } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PROFILE } from '../../data/profile';
-import { clearAllElvaStorage, trackEvent } from '../../lib/storage';
+import { trackEvent } from '../../lib/storage';
 import type { RoutePath } from '../../types/portfolio';
 
 const FOOTER_LINKS: ReadonlyArray<{ to: RoutePath; label: string }> = [
@@ -18,34 +18,29 @@ export function Footer() {
     `Halo ${PROFILE.name}, saya melihat portofolio Anda dan ingin berdiskusi.`,
   )}`;
 
-  const handleResetData = () => {
-    clearAllElvaStorage();
-    window.location.reload();
-  };
-
   return (
     <footer className="no-print border-t border-line bg-surface/65 pb-24 md:pb-10">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3 md:items-start">
           <div>
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold-soft/70 font-serif text-base font-semibold text-ink">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold-soft/70 font-sans text-sm font-bold text-ink">
                 EF
               </span>
               <div>
-                <p className="font-serif text-lg font-medium text-ink">
+                <p className="font-sans text-base font-semibold text-ink">
                   {PROFILE.name}
                 </p>
-                <p className="text-xs text-muted">{PROFILE.city}</p>
+                <p className="text-sm leading-relaxed text-muted">{PROFILE.city}</p>
               </div>
             </div>
-            <p className="mt-3 max-w-xs text-xs leading-relaxed text-muted">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
               {PROFILE.headline}. Terbuka untuk peluang kerja di bidang operasional, layanan pelanggan, dan administrasi.
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold">
+            <p className="eyebrow">
               Navigasi
             </p>
             <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
@@ -71,7 +66,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold">
+            <p className="eyebrow">
               Kontak Langsung
             </p>
             <div className="mt-3 flex flex-col gap-2 text-sm">
@@ -97,19 +92,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-line pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-muted">
+        <div className="mt-10 border-t border-line pt-6">
+          <p className="text-sm leading-relaxed text-muted">
             © {year} {PROFILE.name}. Seluruh hak cipta dilindungi.
           </p>
-
-          <button
-            type="button"
-            onClick={handleResetData}
-            className="inline-flex min-h-[40px] items-center gap-2 rounded-full border border-line bg-bg px-3.5 py-1.5 text-xs font-medium text-muted transition-colors hover:border-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-          >
-            <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
-            <span>Reset Data / Mulai dari Awal</span>
-          </button>
         </div>
       </div>
     </footer>

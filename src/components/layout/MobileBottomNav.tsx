@@ -32,7 +32,7 @@ export function MobileBottomNav() {
             to={to}
             end={to === '/'}
             className={({ isActive }) =>
-              `relative flex min-h-[48px] flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-1.5 text-[11px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+              `relative flex min-h-[48px] flex-col items-center justify-center gap-0.5 rounded-xl px-1 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                 isActive ? 'text-ink' : 'text-muted hover:text-ink'
               }`
             }

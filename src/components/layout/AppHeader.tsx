@@ -27,13 +27,13 @@ export function AppHeader({
           <button
             type="button"
             onClick={handleBack}
-            className="no-print inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-xs font-medium tracking-wide text-ink transition-colors hover:border-gold hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="no-print inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-gold hover:text-gold-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             <ArrowLeft className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
             <span>Kembali</span>
           </button>
 
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-muted">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-muted">
             <Link
               to="/"
               className="inline-flex min-h-[36px] items-center transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"

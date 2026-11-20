@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 export function NotFoundPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 sm:px-6 py-24 sm:py-32 text-center space-y-6">
-      <p className="text-[11px] uppercase tracking-[0.24em] text-gold font-medium">
+      <p className="eyebrow">
         Halaman Tidak Ditemukan
       </p>
       <h1 className="font-serif text-7xl sm:text-8xl font-semibold text-ink tracking-tight">
         404
       </h1>
-      <p className="text-base text-muted leading-relaxed max-w-md mx-auto">
+      <p className="body max-w-md mx-auto">
         Halaman yang Anda cari tidak tersedia atau telah dipindahkan. Silakan
         kembali ke beranda untuk melihat portofolio Elva Febriana.
       </p>

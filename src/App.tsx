@@ -7,7 +7,6 @@ import { Navbar } from './components/layout/Navbar';
 import { PageCurtain } from './components/layout/PageCurtain';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { FloatingWhatsApp } from './components/ui/FloatingWhatsApp';
-import { OutletProvider } from './context/OutletContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
@@ -19,7 +18,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 const ROUTE_TITLES: Record<string, string> = {
   '/': 'Elva Febriana — Barista, Koordinator Acara & Lulusan SMAN 3 Probolinggo',
   '/tentang': 'Profil & Karakter Kerja — Elva Febriana',
-  '/pengalaman': 'Pengalaman & Simulasi Kerja — Elva Febriana',
+  '/pengalaman': 'Pengalaman Kerja — Elva Febriana',
   '/pendidikan': 'Pendidikan & Organisasi — Elva Febriana',
   '/kontak': 'Hubungi Langsung — Elva Febriana',
 };
@@ -104,11 +103,9 @@ export default function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <OutletProvider>
-          <BrowserRouter>
-            <AppShell />
-          </BrowserRouter>
-        </OutletProvider>
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
       </ThemeProvider>
     </ErrorBoundary>
   );

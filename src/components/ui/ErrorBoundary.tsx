@@ -21,13 +21,13 @@ export class ErrorBoundary extends Component<
       return (
         <div className="flex min-h-screen items-center justify-center bg-bg px-6 py-16 text-ink">
           <div className="w-full max-w-md rounded-2xl border border-line bg-surface p-8 text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
+            <p className="eyebrow">
               Terjadi Kendala
             </p>
             <h1 className="mt-3 font-serif text-3xl font-medium text-ink">
               Halaman Perlu Dimuat Ulang
             </h1>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
+            <p className="body mt-3">
               Maaf, tampilan mengalami gangguan sementara. Silakan muat ulang halaman untuk melanjutkan.
             </p>
             <button

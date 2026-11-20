@@ -28,10 +28,10 @@ export function Navbar() {
           to="/"
           className="group inline-flex min-h-[44px] items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         >
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold-soft/70 font-serif text-base font-semibold tracking-tight text-ink transition-colors group-hover:border-gold">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/45 bg-gold-soft/70 font-sans text-sm font-bold text-ink transition-colors group-hover:border-gold">
             EF
           </span>
-          <span className="font-serif text-lg font-medium tracking-tight text-ink sm:text-xl">
+          <span className="font-serif text-[22px] font-semibold tracking-tight text-ink">
             {PROFILE.name}
           </span>
         </Link>
@@ -43,7 +43,7 @@ export function Navbar() {
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `relative inline-flex min-h-[44px] items-center px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+                `relative inline-flex min-h-[44px] items-center px-3.5 py-2 text-[15px] font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                   isActive ? 'text-ink' : 'text-muted hover:text-ink'
                 }`
               }

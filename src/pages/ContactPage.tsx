@@ -8,11 +8,18 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  RotateCcw,
   Send,
 } from 'lucide-react';
 import { AppHeader } from '../components/layout/AppHeader';
 import { PROFILE } from '../data/profile';
-import { STORAGE_KEYS, safeGet, safeSet, trackEvent } from '../lib/storage';
+import {
+  STORAGE_KEYS,
+  clearAllElvaStorage,
+  safeGet,
+  safeSet,
+  trackEvent,
+} from '../lib/storage';
 
 interface ContactDraft {
   senderName: string;
@@ -122,6 +129,17 @@ export function ContactPage() {
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const handleResetLocalData = () => {
+    if (
+      window.confirm(
+        'Hapus draf formulir, data simulasi, dan preferensi tema yang tersimpan di perangkat ini?',
+      )
+    ) {
+      clearAllElvaStorage();
+      window.location.reload();
+    }
+  };
+
   const directWaHref = `https://wa.me/${PROFILE.whatsapp}?text=${encodeURIComponent(
     'Halo Elva, saya tertarik menghubungi Anda terkait peluang kerja atau kolaborasi.',
   )}`;
@@ -151,13 +169,13 @@ export function ContactPage() {
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-muted">
+                <p className="meta">
                   WhatsApp
                 </p>
-                <p className="font-serif text-xl text-ink mt-0.5">
+                <p className="font-sans text-lg font-semibold text-ink mt-0.5">
                   {PROFILE.phone}
                 </p>
-                <p className="text-xs text-muted mt-1">
+                <p className="text-sm text-muted mt-1">
                   Respons cepat untuk wawancara &amp; diskusi kerja
                 </p>
               </div>
@@ -177,10 +195,10 @@ export function ContactPage() {
                 <Mail className="w-5 h-5" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-muted">
+                <p className="meta">
                   Email
                 </p>
-                <p className="font-serif text-lg sm:text-xl text-ink mt-0.5 break-all">
+                <p className="font-sans text-lg font-semibold text-ink mt-0.5 break-all">
                   {PROFILE.email}
                 </p>
               </div>
@@ -202,10 +220,10 @@ export function ContactPage() {
                 <MapPin className="w-5 h-5" strokeWidth={1.5} />
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-muted">
+                <p className="meta">
                   Domisili
                 </p>
-                <p className="font-serif text-xl text-ink mt-0.5">
+                <p className="font-sans text-lg font-semibold text-ink mt-0.5">
                   {PROFILE.city}
                 </p>
               </div>
@@ -233,10 +251,10 @@ export function ContactPage() {
           className="lg:col-span-7 rounded-2xl border border-line bg-surface p-6 sm:p-8 space-y-5"
         >
           <div className="space-y-1 border-b border-line pb-4">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-gold font-medium">
+            <p className="eyebrow">
               Kirim Pesan Terstruktur
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl font-medium text-ink">
               Jadwalkan Wawancara atau Diskusi
             </h2>
           </div>
@@ -258,9 +276,9 @@ export function ContactPage() {
           <div className="space-y-1.5">
             <label
               htmlFor="senderName"
-              className="block text-xs font-medium uppercase tracking-[0.14em] text-muted"
+              className="block text-sm font-semibold text-ink"
             >
-              Nama Anda <span className="text-gold">*</span>
+              Nama Anda <span className="text-gold-ink">*</span>
             </label>
             <input
               id="senderName"
@@ -273,10 +291,10 @@ export function ContactPage() {
                 }
               }}
               placeholder="Contoh: Ibu Rina / HRD"
-              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/70 focus:border-gold focus:outline-none"
+              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-ink placeholder:text-muted focus:border-gold focus:outline-none"
             />
             {errors.senderName && (
-              <p role="alert" className="text-xs text-red-600 dark:text-red-400">
+              <p role="alert" className="text-sm text-red-700 dark:text-red-400">
                 {errors.senderName}
               </p>
             )}
@@ -285,7 +303,7 @@ export function ContactPage() {
           <div className="space-y-1.5">
             <label
               htmlFor="organization"
-              className="block text-xs font-medium uppercase tracking-[0.14em] text-muted"
+              className="block text-sm font-semibold text-ink"
             >
               Nama Usaha / Instansi (Opsional)
             </label>
@@ -297,16 +315,16 @@ export function ContactPage() {
                 setDraft((prev) => ({ ...prev, organization: e.target.value }))
               }
               placeholder="Contoh: Kedai Kopi Nusantara"
-              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/70 focus:border-gold focus:outline-none"
+              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-ink placeholder:text-muted focus:border-gold focus:outline-none"
             />
           </div>
 
           <div className="space-y-1.5">
             <label
               htmlFor="message"
-              className="block text-xs font-medium uppercase tracking-[0.14em] text-muted"
+              className="block text-sm font-semibold text-ink"
             >
-              Pesan <span className="text-gold">*</span>
+              Pesan <span className="text-gold-ink">*</span>
             </label>
             <textarea
               id="message"
@@ -319,17 +337,17 @@ export function ContactPage() {
                 }
               }}
               placeholder="Tuliskan posisi yang ditawarkan, jadwal wawancara, atau pertanyaan Anda..."
-              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/70 focus:border-gold focus:outline-none resize-y"
+              className="w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-ink placeholder:text-muted focus:border-gold focus:outline-none resize-y"
             />
             {errors.message && (
-              <p role="alert" className="text-xs text-red-600 dark:text-red-400">
+              <p role="alert" className="text-sm text-red-700 dark:text-red-400">
                 {errors.message}
               </p>
             )}
           </div>
 
           {submittedNotice && (
-            <p className="rounded-xl border border-gold/40 bg-gold-soft/60 px-4 py-2.5 text-xs text-ink">
+            <p className="rounded-xl border border-gold/40 bg-gold-soft/60 px-4 py-2.5 text-sm text-ink">
               Pesan siap dikirim melalui tab WhatsApp yang baru dibuka.
             </p>
           )}
@@ -362,6 +380,20 @@ export function ContactPage() {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="border-t border-line pt-6 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted">
+          Draf pesan dan preferensi tampilan tersimpan secara lokal di browser ini.
+        </p>
+        <button
+          type="button"
+          onClick={handleResetLocalData}
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm text-muted transition-colors hover:border-gold hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        >
+          <RotateCcw className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+          <span>Hapus data tersimpan di perangkat ini</span>
+        </button>
       </div>
     </div>
   );
