@@ -15,7 +15,53 @@ export interface ProfileData {
   whatsapp: string;
   email: string;
   avatar: string;
+  summaryShort: string;
   summary: string;
+  cvUrl?: string;
+}
+
+export interface ProofPhoto {
+  id: string;
+  src: string;
+  srcSmall?: string;
+  alt: string;
+  caption: string;
+  context: 'outlet' | 'osis' | 'teater' | 'lainnya';
+  width: number;
+  height: number;
+}
+
+export interface WorkSample {
+  id: string;
+  title: string;
+  purpose: string;
+  image: string;
+  alt: string;
+  tool: string;
+  year: string;
+}
+
+export interface Testimonial {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  consent: true;
+}
+
+export interface Metric {
+  id: string;
+  value: string;
+  label: string;
+  source: string;
+}
+
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  year: string;
+  file?: string;
 }
 
 export interface EducationData {

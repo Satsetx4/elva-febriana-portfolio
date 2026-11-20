@@ -1,4 +1,4 @@
-import type { AnalyticsEvent, AnalyticsEventName } from '../types/portfolio';
+export { trackEvent } from './analytics';
 
 export const STORAGE_KEYS = {
   theme: 'elva_theme',
@@ -6,7 +6,6 @@ export const STORAGE_KEYS = {
   stock: 'elva_outlet_check_stock',
   shift: 'elva_outlet_check_shift',
   contactDraft: 'elva_contact_draft',
-  events: 'elva_events',
 } as const;
 
 export function safeGet<T>(key: string, fallback: T): T {
@@ -44,25 +43,4 @@ export function clearAllElvaStorage(): void {
   Object.values(STORAGE_KEYS).forEach((key) => {
     safeRemove(key);
   });
-}
-
-export function getTrackedEvents(): AnalyticsEvent[] {
-  return safeGet<AnalyticsEvent[]>(STORAGE_KEYS.events, []);
-}
-
-export function trackEvent(
-  name: AnalyticsEventName,
-  label: string,
-): AnalyticsEvent {
-  const entry: AnalyticsEvent = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    name,
-    label,
-    timestamp: new Date().toISOString(),
-  };
-
-  const existing = getTrackedEvents();
-  const next = [entry, ...existing].slice(0, 50);
-  safeSet(STORAGE_KEYS.events, next);
-  return entry;
 }

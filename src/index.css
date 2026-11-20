@@ -11,6 +11,7 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
   --color-gold-soft: var(--gold-soft);
   --color-line: var(--line);
 }
@@ -19,8 +20,9 @@
   --bg: #FAF7F2;
   --surface: #FFFFFF;
   --ink: #1F1B16;
-  --muted: #7A7065;
+  --muted: #5A5147;
   --gold: #A8834A;
+  --gold-ink: #7D5F2E;
   --gold-soft: #F3ECE0;
   --line: #E8E1D6;
   color-scheme: light;
@@ -30,8 +32,9 @@
   --bg: #0F0E0C;
   --surface: #181613;
   --ink: #F2EDE4;
-  --muted: #A39889;
+  --muted: #B5AA9B;
   --gold: #D4B483;
+  --gold-ink: #D4B483;
   --gold-soft: #241F18;
   --line: #2A2621;
   color-scheme: dark;
@@ -39,6 +42,7 @@
 
 @layer base {
   html {
+    font-size: 100%;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,6 +65,53 @@
   ::selection {
     background-color: var(--gold-soft);
     color: var(--ink);
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold-ink);
+  }
+
+  .meta {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.25rem 0.875rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .body-lg {
+    font-size: 1.0625rem;
+    line-height: 1.68;
+    color: var(--muted);
+  }
+
+  @media (min-width: 640px) {
+    .body-lg {
+      font-size: 1.125rem;
+    }
+  }
+
+  .body {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--muted);
   }
 }
 

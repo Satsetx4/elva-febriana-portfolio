@@ -1,10 +1,15 @@
 import type {
+  Certificate,
   EducationData,
+  Metric,
   OrgExperience,
   ProfileData,
+  ProofPhoto,
   SkillItem,
+  Testimonial,
   WorkExperience,
   WorkPillar,
+  WorkSample,
 } from '../types/portfolio';
 
 export const PROFILE: ProfileData = {
@@ -15,13 +20,15 @@ export const PROFILE: ProfileData = {
   whatsapp: '6283169174103',
   email: 'elvafebriana611@gmail.com',
   avatar: '/elva_avatar.webp',
+  summaryShort:
+    'Lulusan SMAN 3 Kota Probolinggo (2026) jurusan IPAS dengan pengalaman sebagai barista outlet dan koordinator acara OSIS. Cekatan, teliti dalam pencatatan, dan siap berkontribusi di bidang operasional, layanan pelanggan, maupun administrasi.',
   summary:
-    'Siswa SMAN 3 Kota Probolinggo jurusan IPAS dengan minat pada Matematika, Fisika, Ekonomi, dan Sosiologi. Terbiasa bekerja dalam tim, cepat beradaptasi, cekatan, teliti, dan bertanggung jawab. Mampu bekerja di bawah tekanan serta memiliki kemampuan komunikasi dan koordinasi acara yang baik.',
+    'Lulusan SMAN 3 Kota Probolinggo (2026) jurusan IPAS dengan minat pada Matematika, Fisika, Ekonomi, dan Sosiologi. Terbiasa bekerja dalam tim maupun mandiri, cepat beradaptasi, teliti dalam SOP serta rekap harian, dan mampu bekerja di bawah tekanan.',
 };
 
 export const EDUCATION: EducationData = {
   school: 'SMAN 3 Probolinggo',
-  period: 'Lulusan 2023/2026',
+  period: '2023 – 2026 · Lulus',
   major: 'Ilmu Pengetahuan Alam dan Sosial (IPAS)',
   electives: ['Matematika', 'Fisika', 'Ekonomi', 'Sosiologi'],
   description:
@@ -101,15 +108,10 @@ export const SKILLS: SkillItem[] = [
   },
   {
     id: 'canva',
-    label: 'Edit Canva',
+    label: 'Desain Canva & Administrasi Digital',
     category: 'digital',
-    context: 'Membuat materi visual promosi dan kebutuhan publikasi kegiatan.',
-  },
-  {
-    id: 'laptop',
-    label: 'Mengoperasikan Laptop',
-    category: 'digital',
-    context: 'Menyusun administrasi surat, pencatatan, dan rekap penjualan harian.',
+    context:
+      'Membuat materi visual promosi kegiatan dengan Canva serta menyusun administrasi surat, pencatatan, dan rekap penjualan harian menggunakan laptop.',
   },
 ];
 
@@ -143,3 +145,10 @@ export const WORK_PILLARS: WorkPillar[] = [
     iconName: 'Sparkles',
   },
 ];
+
+// Konten bukti nyata (hanya diisi jika aset asli dari Elva tersedia)
+export const PROOF_PHOTOS: ProofPhoto[] = [];
+export const WORK_SAMPLES: WorkSample[] = [];
+export const TESTIMONIALS: Testimonial[] = [];
+export const METRICS: Metric[] = [];
+export const CERTIFICATES: Certificate[] = [];
