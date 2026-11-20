@@ -1,42 +1,60 @@
-# Golden Starter: Web App Boilerplate untuk Ard
+# Portofolio Digital — Elva Febriana
 
-Boilerplate resmi dan starter kit siap pakai yang dioptimalkan untuk alur kerja **Vibe Coding** dengan standar:
-- **Mobile-First Paradigm:** Didesain dari layar HP (360–420px) dengan target sentuh jempol (minimal 44x44px).
-- **Living & Tactile UI:** Respons taktil pegas alami (`framer-motion`), border tipis elegan, dan anti-dead-flat.
-- **Navigasi Anti-Tersesat:** Header dengan tombol kembali eksplisit, navigasi bawah 1-tap Home, dan proteksi layar buntu.
-- **Inline Data Bars:** Batang perbandingan anggaran otomatis beranimasi in-view saat digulir.
+Website portofolio resmi **Elva Febriana** (Barista, Koordinator Acara & Lulusan SMAN 3 Probolinggo 2026). Dirancang dengan antarmuka mobile-first yang ringan, aksesibel, dan menampilkan informasi riil tanpa data tiruan maupun metrik fiktif.
+
+- **Alamat Live:** [https://elva-febriana-portfolio.vercel.app](https://elva-febriana-portfolio.vercel.app)
+- **Halaman Utama:** Beranda (`/`), Tentang (`/tentang`), Pengalaman (`/pengalaman`), Pendidikan (`/pendidikan`), dan Kontak (`/kontak`).
 
 ---
 
-## Tech Stack
-- **Framework:** Vite + React 19 + TypeScript
+## Teknologi yang Digunakan
+
+- **Framework & Bahasa:** React 19 + TypeScript + Vite 8
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`)
-- **Animasi:** `framer-motion`
-- **Ikon:** `lucide-react`
-- **Utility:** `clsx` + `tailwind-merge`
+- **Animasi & Ikon:** Framer Motion (`framer-motion`) & Lucide React (`lucide-react`)
+- **Routing & Analitik:** React Router 7 (`react-router-dom`) & Vercel Analytics (`@vercel/analytics`)
 
 ---
 
-## Komponen Siap Pakai (`src/components/`)
-1. `layout/MobileContainer.tsx` — Wrapper layout mobile-first yang rapi di layar ponsel dan desktop.
-2. `navigation/AppHeader.tsx` — Header konsisten dengan tombol kembali `< Kembali` dan judul layar.
-3. `navigation/MobileBottomNav.tsx` — Navigasi bawah dengan fluid pill slider (`layoutId`) dan akses 1-tap Home.
-4. `ui/TapButton.tsx` — Tombol taktil membal saat disentuh (`scale: 0.97`) dengan berbagai varian warna.
-5. `ui/LivingCard.tsx` — Kartu visual dengan border 1px, subtle elevation, dan opsi frosted glass.
-6. `ui/InlineDataBar.tsx` — Batang data mini untuk perbandingan rasio/anggaran dengan animasi scroll in-view.
-7. `ui/ScrollProgress.tsx` — Indikator kedalaman scroll di puncak layar.
+## Pengembangan Lokal (Windows PowerShell)
 
----
+Gunakan `npm.cmd` saat menjalankan skrip dari Windows PowerShell agar kompatibel dengan execution policy:
 
-## Cara Menjalankan Dev Server
-```bash
-# Di terminal Windows PowerShell
+```powershell
+# 1. Instalasi dependensi sesuai lockfile
+npm.cmd ci
+
+# 2. Jalankan server pengembangan lokal
 npm.cmd run dev
+
+# 3. Pemeriksaan linter (oxlint)
+npm.cmd run lint
+
+# 4. Pemeriksaan rasio kontras warna (WCAG)
+npm.cmd run check:contrast
+
+# 5. Pemeriksaan tipe TypeScript dan build produksi
+npm.cmd run build
 ```
-*Vite sudah dikonfigurasi dengan mode `--host` sehingga link IP lokal (misal: `http://192.168.x.x:5173`) dapat langsung dibuka di browser HP-mu.*
 
 ---
 
-## Cara Menduplikasi untuk Proyek Baru (5 Detik)
-Kapan pun kamu ingin membuat web app baru, cukup katakan kepada AI:
-> *"Duplikasi golden-starter menjadi proyek [nama-aplikasi] dan mulai dari Lean PRD."*
+## Panduan Menambahkan Bukti Kerja Asli
+
+Seluruh bagian bukti kerja pada portofolio ini bersifat **opsional berbasis data riil**. Setiap bagian bukti akan **otomatis muncul ketika datanya terisi** di `src/data/profile.ts`, dan **tetap tersembunyi selama array-nya kosong** sehingga tidak ada ruang kosong atau data palsu di tampilan publik.
+
+### 1. Siapkan Aset di Folder Publik
+- Letakkan aset mentah terlebih dahulu di folder lokal `content-intake/` (folder ini di-ignore Git dan tidak ikut ter-deploy — lihat panduan di `content-intake/README.md`).
+- Setelah diproses, simpan gambar dokumentasi berformat **WebP** ke folder `public/proof/` (misal: `public/proof/barista-shift.webp`).
+- Untuk foto profil baru, ganti `public/elva_avatar.webp` dan `public/elva_avatar.png`.
+- Untuk berkas CV, simpan PDF ke `public/Elva-Febriana-CV.pdf`.
+
+### 2. Daftarkan Data di `src/data/profile.ts`
+Buka `src/data/profile.ts` dan isi ekspor data sesuai tipe pada `src/types/portfolio.ts`:
+
+- `PROFILE.cvUrl` — Path menuju file CV PDF (contoh: `'/Elva-Febriana-CV.pdf'`) untuk memunculkan tombol unduh CV.
+- `PROOF_PHOTOS` — Daftar foto kegiatan asli (`outlet`, `osis`, `teater`, atau `lainnya`) beserta `caption`, `alt`, serta dimensi `width` dan `height`.
+- `WORK_SAMPLES` — Daftar contoh desain Canva atau materi promosi asli beserta `title`, `purpose`, `image`, `alt`, `tool`, dan `year`.
+- `TESTIMONIALS` — Kutipan testimoni asli dengan nama, jabatan/peran pemberi testimoni, serta `consent: true` sebagai bukti izin tertulis.
+- `METRICS` — Angka capaian terukur yang benar-benar terverifikasi beserta `source` keterangannya.
+- `CERTIFICATES` — Daftar sertifikat atau piagam asli beserta penerbit, tahun, dan tautan file di `public/proof/` bila ada.

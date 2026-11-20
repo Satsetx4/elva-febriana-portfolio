@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Deployment & local raw asset intake
+.vercel
+content-intake/
