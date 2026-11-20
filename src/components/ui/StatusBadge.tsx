@@ -11,7 +11,7 @@ export function StatusBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/90 px-3.5 py-1.5 text-xs font-medium tracking-wide text-ink shadow-xs ${className}`.trim()}
+      className={`inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/90 px-3.5 py-1.5 text-[13px] font-medium tracking-wide text-ink shadow-xs ${className}`.trim()}
     >
       <span className="relative flex h-2 w-2 items-center justify-center" aria-hidden="true">
         {!shouldReduceMotion && (
