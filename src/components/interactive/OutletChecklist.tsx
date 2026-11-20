@@ -57,16 +57,16 @@ export function OutletChecklist() {
           <button
             type="button"
             onClick={() => setActiveTab('stok')}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-xs font-medium transition-colors ${
+            className={`inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'stok'
                 ? 'border border-gold bg-gold-soft text-ink'
                 : 'border border-transparent text-muted hover:text-ink'
             }`}
           >
-            <Package className="h-4 w-4" strokeWidth={1.5} />
+            <Package className="h-4 w-4 shrink-0" strokeWidth={1.5} aria-hidden="true" />
             <span>Stok Bahan</span>
             {lowStockCount > 0 ? (
-              <span className="rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-amber-700 dark:text-amber-300">
+              <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[13px] font-semibold tabular-nums text-amber-900 dark:text-amber-200">
                 {lowStockCount}
               </span>
             ) : null}
@@ -75,18 +75,18 @@ export function OutletChecklist() {
           <button
             type="button"
             onClick={() => setActiveTab('kebersihan')}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-xs font-medium transition-colors ${
+            className={`inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'kebersihan'
                 ? 'border border-gold bg-gold-soft text-ink'
                 : 'border border-transparent text-muted hover:text-ink'
             }`}
           >
-            <ClipboardCheck className="h-4 w-4" strokeWidth={1.5} />
+            <ClipboardCheck className="h-4 w-4 shrink-0" strokeWidth={1.5} aria-hidden="true" />
             <span>Kebersihan Shift</span>
           </button>
         </div>
 
-        <p className="hidden px-2 text-xs text-muted sm:block">
+        <p className="hidden px-2 text-[13px] text-muted sm:block">
           {activeTab === 'stok'
             ? 'Terhubung otomatis dengan transaksi Kasir POS'
             : `Progres Shift ${activeShift === 'buka' ? 'Buka' : 'Tutup'}: ${progressPercent}%`}
@@ -98,20 +98,18 @@ export function OutletChecklist() {
         <div className="rounded-2xl border border-line bg-surface p-5">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
             <div>
-              <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-gold">
-                Inventori Outlet
-              </p>
-              <h3 className="font-serif text-xl font-semibold text-ink">
+              <p className="eyebrow">Inventori Outlet</p>
+              <h3 className="font-sans text-xl font-semibold text-ink">
                 Kontrol Stok Bahan Baku
               </h3>
             </div>
             <button
               type="button"
               onClick={resetStock}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-gold"
             >
-              <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
-              Restok Awal
+              <RotateCcw className="h-4 w-4 text-gold" strokeWidth={1.5} aria-hidden="true" />
+              <span>Restok Awal</span>
             </button>
           </div>
 
@@ -129,20 +127,21 @@ export function OutletChecklist() {
                 >
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="truncate text-sm font-medium text-ink">
+                      <p className="truncate text-sm font-semibold text-ink">
                         {item.name}
                       </p>
                       {isLow ? (
-                        <span className="inline-flex items-center gap-1 rounded-full border border-amber-600/30 bg-amber-500/15 px-2 py-0.5 text-[10px] font-medium text-amber-800 dark:text-amber-300">
+                        <span className="inline-flex items-center gap-1 rounded-full border border-amber-600/35 bg-amber-500/15 px-2.5 py-0.5 text-[13px] font-medium text-amber-900 dark:text-amber-200">
                           <AlertTriangle
-                            className="h-3 w-3"
+                            className="h-3.5 w-3.5 shrink-0"
                             strokeWidth={1.5}
+                            aria-hidden="true"
                           />
-                          Menipis
+                          <span>Menipis</span>
                         </span>
                       ) : null}
                     </div>
-                    <p className="mt-1 text-xs text-muted">
+                    <p className="mt-1 text-[13px] text-muted">
                       Batas minimum: {item.minStock} {item.unit}
                     </p>
                   </div>
@@ -153,15 +152,15 @@ export function OutletChecklist() {
                       aria-label={`Kurangi stok ${item.name}`}
                       disabled={item.qty <= 0}
                       onClick={() => adjustStock(item.id, -1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-ink transition-colors hover:border-gold disabled:opacity-40"
+                      className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface text-ink transition-colors hover:border-gold disabled:opacity-40"
                     >
-                      <Minus className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      <Minus className="h-4 w-4" strokeWidth={1.5} />
                     </button>
-                    <div className="min-w-[54px] text-center">
+                    <div className="min-w-[64px] text-center">
                       <span className="text-sm font-semibold tabular-nums text-ink">
                         {item.qty}
                       </span>{' '}
-                      <span className="text-[11px] text-muted">
+                      <span className="text-[13px] text-muted">
                         {item.unit}
                       </span>
                     </div>
@@ -169,9 +168,9 @@ export function OutletChecklist() {
                       type="button"
                       aria-label={`Tambah stok ${item.name}`}
                       onClick={() => adjustStock(item.id, 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-ink transition-colors hover:border-gold"
+                      className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface text-ink transition-colors hover:border-gold"
                     >
-                      <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      <Plus className="h-4 w-4" strokeWidth={1.5} />
                     </button>
                   </div>
                 </div>
@@ -188,7 +187,7 @@ export function OutletChecklist() {
                   key={shift}
                   type="button"
                   onClick={() => setActiveShift(shift)}
-                  className={`rounded-xl border px-3.5 py-2 text-xs font-medium transition-colors ${
+                  className={`min-h-[44px] rounded-xl border px-4 py-2 text-sm font-medium transition-colors ${
                     activeShift === shift
                       ? 'border-gold bg-gold-soft text-ink'
                       : 'border-line bg-bg/60 text-muted hover:text-ink'
@@ -202,24 +201,24 @@ export function OutletChecklist() {
             <button
               type="button"
               onClick={() => resetChecklist(activeShift)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:border-gold hover:text-ink"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3.5 py-2 text-sm font-medium text-muted transition-colors hover:border-gold hover:text-ink"
             >
-              <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
-              Reset Shift
+              <RotateCcw className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+              <span>Reset Shift</span>
             </button>
           </div>
 
           {/* Animated Gold Progress Bar */}
           <div className="mb-5 space-y-2">
-            <div className="flex items-center justify-between text-xs">
+            <div className="flex items-center justify-between text-sm">
               <span className="text-muted">
                 Kelengkapan {activeShift === 'buka' ? 'Shift Buka' : 'Shift Tutup'}
               </span>
-              <span className="font-medium tabular-nums text-ink">
+              <span className="font-semibold tabular-nums text-ink">
                 {completedCount}/{shiftItems.length} selesai ({progressPercent}%)
               </span>
             </div>
-            <div className="h-2 w-full overflow-hidden rounded-full border border-line bg-bg">
+            <div className="h-2.5 w-full overflow-hidden rounded-full border border-line bg-bg">
               <motion.div
                 className="h-full rounded-full bg-gold"
                 initial={false}
@@ -241,7 +240,7 @@ export function OutletChecklist() {
                   role="checkbox"
                   aria-checked={item.checked}
                   onClick={() => toggleChecklistItem(item.id)}
-                  className={`flex w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-colors ${
+                  className={`flex min-h-[48px] w-full items-start gap-3 rounded-xl border p-3.5 text-left transition-colors ${
                     item.checked
                       ? 'border-gold/50 bg-gold-soft/40'
                       : 'border-line bg-bg/50 hover:border-gold/50'
@@ -258,7 +257,7 @@ export function OutletChecklist() {
                   </span>
 
                   <span
-                    className={`text-sm leading-relaxed transition-all duration-200 ${
+                    className={`text-sm sm:text-base leading-relaxed transition-all duration-200 ${
                       item.checked
                         ? 'text-muted line-through decoration-gold/70'
                         : 'text-ink'
@@ -284,27 +283,30 @@ export function OutletChecklist() {
                   opacity: 1,
                   y: 0,
                   scale: 1,
-                  transition: { duration: 0.35, ease: EASE_EDITORIAL },
+                  transition: {
+                    duration: shouldReduceMotion ? 0 : 0.35,
+                    ease: EASE_EDITORIAL,
+                  },
                 }}
-                exit={{ opacity: 0, y: -6 }}
-                className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-gold bg-gold-soft/70 px-4 py-3.5"
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-gold bg-gold-soft/70 px-4 py-3.5"
               >
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold bg-surface text-gold">
-                    <Award className="h-5 w-5" strokeWidth={1.5} />
+                    <Award className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                   </div>
                   <div>
-                    <p className="font-serif text-lg font-semibold text-ink">
+                    <p className="font-sans text-lg font-semibold text-ink">
                       Outlet Siap
                     </p>
-                    <p className="text-xs text-muted">
+                    <p className="text-sm text-muted">
                       Seluruh standar{' '}
                       {activeShift === 'buka' ? 'persiapan buka' : 'tutup shift'}{' '}
                       telah terpenuhi 100%.
                     </p>
                   </div>
                 </div>
-                <span className="shrink-0 rounded-full border border-gold/60 bg-surface px-3 py-1 font-serif text-xs font-semibold tracking-wider uppercase text-gold">
+                <span className="pill self-start sm:self-auto shrink-0 border border-gold/60 bg-surface text-gold-ink">
                   100% Terverifikasi
                 </span>
               </motion.div>

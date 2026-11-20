@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   CheckCircle2,
   ClipboardList,
@@ -76,6 +76,7 @@ export function PosSimulator() {
     resetSales,
   } = useOutlet();
 
+  const shouldReduceMotion = useReducedMotion();
   const [selectedDrink, setSelectedDrink] = useState<DrinkMenuItem>(
     MENU_ITEMS[0],
   );
@@ -212,8 +213,8 @@ export function PosSimulator() {
   return (
     <div className="space-y-6">
       {/* Subtle Editorial Disclaimer */}
-      <div className="flex items-start gap-3 rounded-xl border border-line bg-gold-soft/50 px-4 py-3 text-xs leading-relaxed text-muted">
-        <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} />
+      <div className="flex items-start gap-3 rounded-xl border border-line bg-gold-soft/50 px-4 py-3 text-sm leading-relaxed text-muted">
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} aria-hidden="true" />
         <p>{SIMULATION_DISCLAIMER}</p>
       </div>
 
@@ -224,14 +225,12 @@ export function PosSimulator() {
           <div className="rounded-2xl border border-line bg-surface p-5">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-gold">
-                  Daftar Menu
-                </p>
-                <h3 className="font-serif text-xl font-semibold text-ink">
+                <p className="eyebrow">Daftar Menu</p>
+                <h3 className="font-sans text-xl font-semibold text-ink">
                   Pilih Minuman &amp; Takaran
                 </h3>
               </div>
-              <Coffee className="h-5 w-5 text-gold" strokeWidth={1.5} />
+              <Coffee className="h-5 w-5 text-gold" strokeWidth={1.5} aria-hidden="true" />
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
@@ -250,18 +249,16 @@ export function PosSimulator() {
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <span className="text-[10px] font-medium tracking-[0.14em] uppercase text-muted">
-                          {drink.category}
-                        </span>
-                        <p className="mt-0.5 font-serif text-lg font-semibold text-ink">
+                        <span className="meta">{drink.category}</span>
+                        <p className="mt-0.5 font-sans text-lg font-semibold text-ink">
                           {drink.name}
                         </p>
                       </div>
-                      <span className="shrink-0 rounded-full border border-line bg-surface px-2.5 py-0.5 text-xs font-medium tabular-nums text-ink">
+                      <span className="shrink-0 rounded-full border border-line bg-surface px-2.5 py-0.5 text-[13px] font-semibold tabular-nums text-ink">
                         {formatRupiah(drink.price[size])}
                       </span>
                     </div>
-                    <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted">
+                    <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted">
                       {drink.description}
                     </p>
                   </button>
@@ -272,7 +269,7 @@ export function PosSimulator() {
             {/* Size & Sugar Controls */}
             <div className="mt-5 grid gap-4 border-t border-line pt-4 sm:grid-cols-2">
               <div>
-                <p className="mb-2 text-xs font-medium text-muted">
+                <p className="mb-2 text-sm font-medium text-muted">
                   Ukuran Cup
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -281,7 +278,7 @@ export function PosSimulator() {
                       key={option}
                       type="button"
                       onClick={() => setSize(option)}
-                      className={`rounded-lg border px-3 py-2 text-xs font-medium transition-colors ${
+                      className={`min-h-[44px] rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                         size === option
                           ? 'border-gold bg-gold-soft text-ink'
                           : 'border-line bg-bg/60 text-muted hover:text-ink'
@@ -294,7 +291,7 @@ export function PosSimulator() {
               </div>
 
               <div>
-                <p className="mb-2 text-xs font-medium text-muted">
+                <p className="mb-2 text-sm font-medium text-muted">
                   Tingkat Gula
                 </p>
                 <div className="grid grid-cols-3 gap-2">
@@ -303,7 +300,7 @@ export function PosSimulator() {
                       key={level}
                       type="button"
                       onClick={() => setSugar(level)}
-                      className={`rounded-lg border px-2 py-2 text-xs font-medium transition-colors ${
+                      className={`min-h-[44px] rounded-lg border px-2 py-2 text-sm font-medium transition-colors ${
                         sugar === level
                           ? 'border-gold bg-gold-soft text-ink'
                           : 'border-line bg-bg/60 text-muted hover:text-ink'
@@ -323,66 +320,59 @@ export function PosSimulator() {
 
           {/* Live Kartu SOP Racikan */}
           <div className="rounded-2xl border border-line bg-surface p-5">
-            <div className="mb-3 flex items-center justify-between gap-2">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <ClipboardList
                   className="h-4 w-4 text-gold"
                   strokeWidth={1.5}
+                  aria-hidden="true"
                 />
-                <h4 className="font-serif text-lg font-semibold text-ink">
+                <h4 className="font-sans text-lg font-semibold text-ink">
                   Kartu SOP Racikan
                 </h4>
               </div>
-              <span className="rounded-full border border-line bg-gold-soft/70 px-2.5 py-0.5 text-[11px] font-medium text-gold">
+              <span className="pill border border-line bg-gold-soft text-gold-ink">
                 {selectedDrink.name} · {SIZE_LABELS[size]}
               </span>
             </div>
 
-            <dl className="grid gap-2.5 text-xs sm:grid-cols-2">
+            <dl className="grid gap-2.5 text-sm sm:grid-cols-2">
               <div className="rounded-xl border border-line bg-bg/50 p-3">
-                <dt className="text-[11px] uppercase tracking-wider text-muted">
-                  Base Teh
-                </dt>
+                <dt className="meta">Base Teh</dt>
                 <dd className="mt-1 font-medium text-ink">{activeSop.teh}</dd>
               </div>
               <div className="rounded-xl border border-line bg-bg/50 p-3">
-                <dt className="text-[11px] uppercase tracking-wider text-muted">
-                  Takaran Gula
-                </dt>
+                <dt className="meta">Takaran Gula</dt>
                 <dd className="mt-1 font-medium text-ink">
                   {formatSugarSop(activeSop.gula, sugar)}
                 </dd>
               </div>
               {activeSop.tambahan ? (
                 <div className="rounded-xl border border-line bg-bg/50 p-3">
-                  <dt className="text-[11px] uppercase tracking-wider text-muted">
-                    Tambahan
-                  </dt>
+                  <dt className="meta">Tambahan</dt>
                   <dd className="mt-1 font-medium text-ink">
                     {activeSop.tambahan}
                   </dd>
                 </div>
               ) : null}
               <div className="rounded-xl border border-line bg-bg/50 p-3">
-                <dt className="text-[11px] uppercase tracking-wider text-muted">
-                  Es Batu
-                </dt>
+                <dt className="meta">Es Batu</dt>
                 <dd className="mt-1 font-medium text-ink">{activeSop.es}</dd>
               </div>
             </dl>
 
-            <p className="mt-3 rounded-xl border border-dashed border-line bg-bg/40 px-3 py-2 text-xs text-muted">
-              <span className="font-medium text-ink">Catatan Barista:</span>{' '}
+            <p className="mt-3 rounded-xl border border-dashed border-line bg-bg/40 px-3.5 py-2.5 text-sm leading-relaxed text-muted">
+              <span className="font-semibold text-ink">Catatan Barista:</span>{' '}
               {activeSop.catatan}
             </p>
 
             <button
               type="button"
               onClick={handleAddToCart}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-gold bg-gold-soft px-4 py-2.5 text-sm font-medium text-ink transition-all hover:bg-gold hover:text-surface active:scale-[0.99]"
+              className="mt-4 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-gold bg-gold-soft px-4 py-2.5 text-sm font-medium text-ink transition-all hover:border-gold-ink hover:bg-gold-ink hover:text-surface active:scale-[0.99]"
             >
-              <Plus className="h-4 w-4" strokeWidth={1.5} />
-              Tambah ke Pesanan ({formatRupiah(activePrice)})
+              <Plus className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+              <span>Tambah ke Pesanan ({formatRupiah(activePrice)})</span>
             </button>
           </div>
         </div>
@@ -395,18 +385,19 @@ export function PosSimulator() {
                 <ShoppingBag
                   className="h-4 w-4 text-gold"
                   strokeWidth={1.5}
+                  aria-hidden="true"
                 />
-                <h3 className="font-serif text-xl font-semibold text-ink">
+                <h3 className="font-sans text-xl font-semibold text-ink">
                   Keranjang Pesanan
                 </h3>
               </div>
-              <span className="text-xs tabular-nums text-muted">
+              <span className="text-sm font-medium tabular-nums text-muted">
                 {cart.reduce((s, i) => s + i.qty, 0)} cup
               </span>
             </div>
 
             {cart.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-line bg-bg/40 px-4 py-8 text-center text-xs text-muted">
+              <div className="rounded-xl border border-dashed border-line bg-bg/40 px-4 py-8 text-center text-sm leading-relaxed text-muted">
                 Belum ada minuman di pesanan. Pilih menu di sebelah kiri lalu
                 klik &ldquo;Tambah ke Pesanan&rdquo;.
               </div>
@@ -418,10 +409,10 @@ export function PosSimulator() {
                     className="flex items-center justify-between gap-3 rounded-xl border border-line bg-bg/50 px-3 py-2.5"
                   >
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-ink">
+                      <p className="truncate text-sm font-semibold text-ink">
                         {item.name}
                       </p>
-                      <p className="text-[11px] text-muted">
+                      <p className="meta">
                         {SIZE_LABELS[item.size]} · {SUGAR_LABELS[item.sugar]} ·{' '}
                         {formatRupiah(item.unitPrice)}
                       </p>
@@ -431,18 +422,18 @@ export function PosSimulator() {
                         type="button"
                         aria-label={`Kurangi ${item.name}`}
                         onClick={() => handleUpdateQty(item.id, -1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-lg border border-line bg-surface text-ink hover:border-gold"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-ink hover:border-gold"
                       >
                         <Minus className="h-3.5 w-3.5" strokeWidth={1.5} />
                       </button>
-                      <span className="w-6 text-center text-xs font-medium tabular-nums text-ink">
+                      <span className="w-7 text-center text-sm font-semibold tabular-nums text-ink">
                         {item.qty}
                       </span>
                       <button
                         type="button"
                         aria-label={`Tambah ${item.name}`}
                         onClick={() => handleUpdateQty(item.id, 1)}
-                        className="flex h-7 w-7 items-center justify-center rounded-lg border border-line bg-surface text-ink hover:border-gold"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-ink hover:border-gold"
                       >
                         <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
                       </button>
@@ -450,7 +441,7 @@ export function PosSimulator() {
                         type="button"
                         aria-label={`Hapus ${item.name}`}
                         onClick={() => handleRemoveItem(item.id)}
-                        className="ml-1 flex h-7 w-7 items-center justify-center rounded-lg border border-line bg-surface text-muted hover:text-ink"
+                        className="ml-1 flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-surface text-muted hover:text-ink"
                       >
                         <Trash2 className="h-3.5 w-3.5" strokeWidth={1.5} />
                       </button>
@@ -464,13 +455,13 @@ export function PosSimulator() {
             <div className="mt-4 space-y-3 border-t border-line pt-4">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted">Subtotal</span>
-                <span className="font-serif text-xl font-semibold tabular-nums text-ink">
+                <span className="font-sans text-xl font-semibold tabular-nums text-ink">
                   {formatRupiah(cartTotal)}
                 </span>
               </div>
 
               <div>
-                <p className="mb-2 text-xs font-medium text-muted">
+                <p className="mb-2 text-sm font-medium text-muted">
                   Pembayaran Tunai
                 </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
@@ -478,7 +469,7 @@ export function PosSimulator() {
                     type="button"
                     disabled={cartTotal === 0}
                     onClick={() => setCashInput(String(cartTotal))}
-                    className="rounded-lg border border-line bg-bg/60 px-2.5 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold disabled:opacity-40"
+                    className="min-h-[44px] rounded-lg border border-line bg-bg/60 px-3 py-2 text-sm font-medium text-ink transition-colors hover:border-gold disabled:opacity-40"
                   >
                     Uang Pas
                   </button>
@@ -488,7 +479,7 @@ export function PosSimulator() {
                       type="button"
                       disabled={cartTotal === 0}
                       onClick={() => setCashInput(String(nominal))}
-                      className="rounded-lg border border-line bg-bg/60 px-2.5 py-1.5 text-xs font-medium tabular-nums text-ink transition-colors hover:border-gold disabled:opacity-40"
+                      className="min-h-[44px] rounded-lg border border-line bg-bg/60 px-3 py-2 text-sm font-medium tabular-nums text-ink transition-colors hover:border-gold disabled:opacity-40"
                     >
                       {formatRupiah(nominal)}
                     </button>
@@ -504,17 +495,17 @@ export function PosSimulator() {
                     value={cashInput}
                     onChange={(e) => setCashInput(e.target.value)}
                     placeholder="Masukkan nominal tunai (Rp)..."
-                    className="w-full rounded-xl border border-line bg-bg/60 px-3 py-2 text-sm tabular-nums text-ink placeholder:text-muted/70 focus:border-gold focus:outline-none"
+                    className="min-h-[44px] w-full rounded-xl border border-line bg-bg/60 px-3.5 py-2.5 text-base sm:text-sm tabular-nums text-ink placeholder:text-muted focus:border-gold focus:outline-none"
                   />
                 </label>
               </div>
 
-              <div className="flex items-center justify-between rounded-xl border border-line bg-bg/40 px-3 py-2 text-xs">
+              <div className="flex items-center justify-between rounded-xl border border-line bg-bg/40 px-3.5 py-2.5 text-sm">
                 <span className="text-muted">Kembalian</span>
                 <span
-                  className={`font-medium tabular-nums ${
+                  className={`font-semibold tabular-nums ${
                     cart.length > 0 && changeAmount < 0
-                      ? 'text-amber-600 dark:text-amber-400'
+                      ? 'text-amber-800 dark:text-amber-300'
                       : 'text-ink'
                   }`}
                 >
@@ -530,10 +521,10 @@ export function PosSimulator() {
                 type="button"
                 disabled={!canCheckout}
                 onClick={handleCompleteTransaction}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-surface transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-medium text-surface transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                <Receipt className="h-4 w-4" strokeWidth={1.5} />
-                Selesaikan Transaksi
+                <Receipt className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+                <span>Selesaikan Transaksi</span>
               </button>
             </div>
           </div>
@@ -543,19 +534,23 @@ export function PosSimulator() {
             {lastReceipt ? (
               <motion.div
                 key={lastReceipt.transaction.id}
-                initial={{ opacity: 0, y: 10 }}
+                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
                 animate={{
                   opacity: 1,
                   y: 0,
-                  transition: { duration: 0.3, ease: EASE_EDITORIAL },
+                  transition: {
+                    duration: shouldReduceMotion ? 0 : 0.3,
+                    ease: EASE_EDITORIAL,
+                  },
                 }}
-                exit={{ opacity: 0, y: -6 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
                 className="rounded-2xl border border-gold/60 bg-surface p-5"
               >
-                <div className="flex items-start gap-2.5 rounded-xl border border-line bg-gold-soft/60 px-3 py-2.5 text-xs text-ink">
+                <div className="flex items-start gap-2.5 rounded-xl border border-line bg-gold-soft/60 px-3.5 py-2.5 text-sm leading-relaxed text-ink">
                   <CheckCircle2
                     className="mt-0.5 h-4 w-4 shrink-0 text-gold"
                     strokeWidth={1.5}
+                    aria-hidden="true"
                   />
                   <span>
                     Transaksi tercatat. Stok bahan baku di{' '}
@@ -565,18 +560,18 @@ export function PosSimulator() {
                 </div>
 
                 <div className="mt-4 border-b border-dashed border-line pb-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-serif text-lg font-semibold text-ink">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="font-sans text-lg font-semibold text-ink">
                       Struk Transaksi
                     </h4>
-                    <span className="text-[11px] font-medium tabular-nums text-muted">
+                    <span className="text-[13px] font-medium tabular-nums text-muted">
                       {lastReceipt.transaction.id} ·{' '}
                       {formatTime(lastReceipt.transaction.timestamp)}
                     </span>
                   </div>
                 </div>
 
-                <ul className="my-3 space-y-1.5 text-xs">
+                <ul className="my-3 space-y-1.5 text-sm">
                   {lastReceipt.transaction.items.map((item) => (
                     <li
                       key={item.id}
@@ -593,8 +588,8 @@ export function PosSimulator() {
                   ))}
                 </ul>
 
-                <div className="space-y-1 border-t border-dashed border-line pt-3 text-xs">
-                  <div className="flex justify-between font-medium text-ink">
+                <div className="space-y-1 border-t border-dashed border-line pt-3 text-sm">
+                  <div className="flex justify-between font-semibold text-ink">
                     <span>Total</span>
                     <span className="tabular-nums">
                       {formatRupiah(lastReceipt.transaction.total)}
@@ -623,10 +618,8 @@ export function PosSimulator() {
       <div className="rounded-2xl border border-line bg-surface p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.16em] uppercase text-gold">
-              Laporan Shift
-            </p>
-            <h3 className="font-serif text-xl font-semibold text-ink">
+            <p className="eyebrow">Laporan Shift</p>
+            <h3 className="font-sans text-xl font-semibold text-ink">
               Rekap Penjualan Harian
             </h3>
           </div>
@@ -635,39 +628,39 @@ export function PosSimulator() {
               type="button"
               disabled={sales.length === 0}
               onClick={handleExportCsv}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold disabled:opacity-40"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-gold disabled:opacity-40"
             >
-              <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
-              Ekspor CSV
+              <Download className="h-4 w-4 text-gold" strokeWidth={1.5} aria-hidden="true" />
+              <span>Ekspor CSV</span>
             </button>
             <button
               type="button"
               disabled={sales.length === 0 && !lastReceipt}
               onClick={handleResetAll}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:border-gold hover:text-ink disabled:opacity-40"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-line bg-bg/70 px-3.5 py-2 text-sm font-medium text-muted transition-colors hover:border-gold hover:text-ink disabled:opacity-40"
             >
-              <RotateCcw className="h-3.5 w-3.5" strokeWidth={1.5} />
-              Tutup Kasir (Reset)
+              <RotateCcw className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+              <span>Tutup Kasir (Reset)</span>
             </button>
           </div>
         </div>
 
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-line bg-bg/50 p-4">
-            <p className="text-xs text-muted">Total Cup Terjual</p>
-            <p className="mt-1 font-serif text-2xl font-semibold text-ink">
+            <p className="text-sm text-muted">Total Cup Terjual</p>
+            <p className="mt-1 font-sans text-2xl font-semibold tabular-nums text-ink">
               <CountUp value={totalCupsSold} suffix=" cup" />
             </p>
           </div>
           <div className="rounded-xl border border-line bg-bg/50 p-4">
-            <p className="text-xs text-muted">Total Omzet</p>
-            <p className="mt-1 font-serif text-2xl font-semibold text-ink">
+            <p className="text-sm text-muted">Total Omzet</p>
+            <p className="mt-1 font-sans text-2xl font-semibold tabular-nums text-ink">
               <CountUp prefix="Rp " value={totalOmzet} />
             </p>
           </div>
           <div className="rounded-xl border border-line bg-bg/50 p-4">
-            <p className="text-xs text-muted">Menu Terlaris</p>
-            <p className="mt-1 truncate font-serif text-xl font-semibold text-ink">
+            <p className="text-sm text-muted">Menu Terlaris</p>
+            <p className="mt-1 truncate font-sans text-lg font-semibold text-ink">
               {bestSeller}
             </p>
           </div>
@@ -675,7 +668,7 @@ export function PosSimulator() {
 
         {sales.length > 0 ? (
           <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-line text-muted">
                   <th className="py-2 pr-3 font-medium">ID</th>
@@ -710,7 +703,7 @@ export function PosSimulator() {
             </table>
           </div>
         ) : (
-          <p className="mt-4 text-center text-xs text-muted">
+          <p className="mt-4 text-center text-sm text-muted">
             Belum ada transaksi tercatat pada shift ini.
           </p>
         )}
