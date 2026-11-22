@@ -238,7 +238,7 @@ export function ContactPage() {
             {PROFILE.cvUrl && (
               <a
                 href={PROFILE.cvUrl}
-                download
+                download="Elva-Febriana-CV.pdf"
                 onClick={() => trackEvent('cta_click', 'download_cv')}
                 className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-ink text-bg px-5 py-3 text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
               >

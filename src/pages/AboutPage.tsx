@@ -90,31 +90,33 @@ export function AboutPage() {
               </span>
             ))}
           </div>
-          <div className="pt-4 border-t border-line no-print space-y-2.5">
-            {PROFILE.cvUrl && (
+          {PROFILE.cvUrl && (
+            <div className="pt-4 border-t border-line no-print space-y-2.5">
               <a
                 href={PROFILE.cvUrl}
-                download
+                download="Elva-Febriana-CV.pdf"
                 onClick={() => trackEvent('cta_click', 'download_cv')}
                 className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-ink text-bg px-4 py-2.5 text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 <Download className="w-4 h-4" strokeWidth={1.5} aria-hidden="true" />
                 <span>Unduh CV (PDF)</span>
               </a>
-            )}
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-line bg-bg px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold-soft/60 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-            >
-              <Printer
-                className="w-4 h-4 text-gold"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              />
-              <span>Cetak / Simpan PDF</span>
-            </button>
-          </div>
+              <a
+                href={PROFILE.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent('cta_click', 'print_cv')}
+                className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-line bg-bg px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold-soft/60 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              >
+                <Printer
+                  className="w-4 h-4 text-gold"
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+                <span>Buka / Cetak CV (PDF)</span>
+              </a>
+            </div>
+          )}
         </div>
       </section>
 
