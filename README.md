@@ -2,7 +2,7 @@
 
 Website portofolio resmi **Elva Febriana** (Barista, Koordinator Acara & Lulusan SMAN 3 Probolinggo 2026). Dirancang dengan antarmuka mobile-first yang ringan, aksesibel, dan menampilkan informasi riil tanpa data tiruan maupun metrik fiktif.
 
-- **Alamat Live:** [https://elva-febriana-portfolio.vercel.app](https://elva-febriana-portfolio.vercel.app)
+- **Alamat Live:** [https://elvafebriana.my.id](https://elvafebriana.my.id) (cadangan Vercel: [https://elva-febriana-portfolio.vercel.app](https://elva-febriana-portfolio.vercel.app))
 - **Halaman Utama:** Beranda (`/`), Tentang (`/tentang`), Pengalaman (`/pengalaman`), Pendidikan (`/pendidikan`), dan Kontak (`/kontak`).
 
 ---

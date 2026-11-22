@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elva-febriana-portfolio.vercel.app/sitemap.xml
+Sitemap: https://elvafebriana.my.id/sitemap.xml
