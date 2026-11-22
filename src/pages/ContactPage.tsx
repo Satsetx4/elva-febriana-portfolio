@@ -234,14 +234,27 @@ export function ContactPage() {
             />
           </a>
 
-          <button
-            type="button"
-            onClick={handleDownloadVcard}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold-soft/60 active:scale-[0.98]"
-          >
-            <Download className="w-4 h-4 text-gold" strokeWidth={1.5} />
-            <span>Unduh vCard (.vcf)</span>
-          </button>
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
+            {PROFILE.cvUrl && (
+              <a
+                href={PROFILE.cvUrl}
+                download
+                onClick={() => trackEvent('cta_click', 'download_cv')}
+                className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-ink text-bg px-5 py-3 text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+              >
+                <Download className="w-4 h-4" strokeWidth={1.5} />
+                <span>Unduh CV (PDF + QR)</span>
+              </a>
+            )}
+            <button
+              type="button"
+              onClick={handleDownloadVcard}
+              className="w-full inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-line bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-gold hover:bg-gold-soft/60 active:scale-[0.98]"
+            >
+              <Download className="w-4 h-4 text-gold" strokeWidth={1.5} />
+              <span>Unduh vCard (.vcf)</span>
+            </button>
+          </div>
         </div>
 
         {/* Validated Contact Form */}

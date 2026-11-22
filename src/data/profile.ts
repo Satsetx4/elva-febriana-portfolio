@@ -20,6 +20,7 @@ export const PROFILE: ProfileData = {
   whatsapp: '6283169174103',
   email: 'elvafebriana611@gmail.com',
   avatar: '/elva_avatar.webp',
+  cvUrl: '/Elva-Febriana-CV.pdf',
   summaryShort:
     'Lulusan SMAN 3 Kota Probolinggo (2026) jurusan IPAS dengan pengalaman sebagai barista outlet dan koordinator acara OSIS. Cekatan, teliti dalam pencatatan, dan siap berkontribusi di bidang operasional, layanan pelanggan, maupun administrasi.',
   summary:
