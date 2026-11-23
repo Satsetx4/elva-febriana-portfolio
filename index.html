@@ -42,15 +42,15 @@
       rel="stylesheet"
     />
 
-    <!-- Anti-FOUC Theme Boot (default: light) -->
+    <!-- Anti-FOUC Theme Boot (default: dark) -->
     <script>
       (function () {
         try {
-          if (window.localStorage.getItem('elva_theme') === 'dark') {
+          if (window.localStorage.getItem('elva_theme') !== 'light') {
             document.documentElement.classList.add('dark');
           }
         } catch (_) {
-          // Ignore storage access errors in restricted contexts
+          document.documentElement.classList.add('dark');
         }
       })();
     </script>

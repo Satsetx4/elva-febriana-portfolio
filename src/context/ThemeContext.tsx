@@ -20,11 +20,11 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function readInitialTheme(): ThemeMode {
   try {
-    if (typeof window === 'undefined') return 'light';
+    if (typeof window === 'undefined') return 'dark';
     const stored = window.localStorage.getItem(STORAGE_KEYS.theme);
-    return stored === 'dark' ? 'dark' : 'light';
+    return stored === 'light' ? 'light' : 'dark';
   } catch {
-    return 'light';
+    return 'dark';
   }
 }
 
