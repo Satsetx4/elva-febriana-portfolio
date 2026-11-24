@@ -147,8 +147,45 @@ export const WORK_PILLARS: WorkPillar[] = [
   },
 ];
 
-// Konten bukti nyata (hanya diisi jika aset asli dari Elva tersedia)
-export const PROOF_PHOTOS: ProofPhoto[] = [];
+// Foto visual kegiatan & konteks pengalaman (diperbarui dari foto referensi Elva)
+export const PROOF_PHOTOS: ProofPhoto[] = [
+  {
+    id: 'outlet-barista',
+    src: '/proof/outlet-barista.webp',
+    alt: 'Elva Febriana menyiapkan racikan es teh di meja bar outlet',
+    caption: 'Meracik minuman sesuai takaran resep dengan area kerja yang rapi dan higienis.',
+    context: 'outlet',
+    width: 1200,
+    height: 896,
+  },
+  {
+    id: 'outlet-cashier',
+    src: '/proof/outlet-cashier.webp',
+    alt: 'Elva Febriana melayani transaksi pelanggan di meja kasir POS outlet',
+    caption: 'Pelayanan kasir POS yang ramah, cekatan, dan teliti dalam pencatatan transaksi.',
+    context: 'outlet',
+    width: 1200,
+    height: 896,
+  },
+  {
+    id: 'osis-event',
+    src: '/proof/osis-event.webp',
+    alt: 'Elva Febriana bertugas sebagai koordinator stand bazar OSIS SMAN 3 Probolinggo',
+    caption: 'Koordinasi stand bazar, alur acara, dan promosi langsung saat kegiatan OSIS.',
+    context: 'osis',
+    width: 1200,
+    height: 896,
+  },
+  {
+    id: 'teater-stage',
+    src: '/proof/teater-stage.webp',
+    alt: 'Elva Febriana tampil di panggung ekstrakurikuler Teater SMAN 3 Probolinggo',
+    caption: 'Penampilan panggung teater yang melatih kepercayaan diri, ekspresi, dan komunikasi.',
+    context: 'teater',
+    width: 1200,
+    height: 896,
+  },
+];
 export const WORK_SAMPLES: WorkSample[] = [];
 export const TESTIMONIALS: Testimonial[] = [];
 export const METRICS: Metric[] = [];
